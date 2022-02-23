@@ -1,0 +1,24 @@
+version: '3.1'
+
+services:
+
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
+  face2expapi:
+    image: techvisionz/face2expapi:v1
+    restart: always
+    ports:
+      - 3000:3000    
+    environment:
+      STORE_DB: "true"
+      DBHOST: "mongo:27017"
+      DBUSER: "root"
+      DBPASS: "example"
+      DBNAME: "face2expression"
+      COLLECTION: "expressions"
+      PORT: 3000
